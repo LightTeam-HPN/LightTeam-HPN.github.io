@@ -1,9 +1,9 @@
 # _config.yml
 title: HPN Light Projects
-description: Keep viewing this website for further updates
+description: This is for our light website
 baseurl: ""  # leave as "" if the site is hosted at the root
 url: "https://username.github.io"  # change to your GitHub Pages URL
-theme: jekyll-theme-minimal
+theme: jekyll-theme-slate  # or any other theme you prefer
 markdown: kramdown
 plugins:
   - jekyll-feed
