@@ -1,14 +1,3 @@
-# _config.yml
-title: HPN Light Projects
-description: This is for our light website
-baseurl: ""  
-url: "https://username.github.io" 
-theme: jekyll-theme-slate
-markdown: kramdown
-plugins:
-  - jekyll-feed
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
