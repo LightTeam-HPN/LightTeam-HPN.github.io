@@ -1,9 +1,3 @@
-# _config.yml
-title: My Jekyll Site
-description: A simple Jekyll site
-baseurl: ""  # leave as "" if the site is hosted at the root
-url: "https://username.github.io"  # change to your GitHub Pages URL
-theme: jekyll-theme-slate  # or any other theme you prefer
-markdown: kramdown
-plugins:
-  - jekyll-feed
+theme: jekyll-theme-minimal
+title: Octocat's homepage
+description: Bookmark this to keep an eye on my project updates!
