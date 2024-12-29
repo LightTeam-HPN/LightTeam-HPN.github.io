@@ -40,21 +40,25 @@
 
         .prototype-section {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
+            width: 100%;
             margin-top: 20px;
         }
 
         .prototype-video {
-            flex: 1;
+            width: 90%;
+            max-width: 400px;
             height: 200px;
             border: 2px solid #ccc;
         }
 
         .prototype-summary {
-            flex: 1;
+            width: 90%;
+            max-width: 400px;
             font-size: 1.2em;
+            text-align: center;
         }
 
         .schedule-button {
@@ -75,7 +79,7 @@
 
         .footer {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             padding: 10px;
             background-color: black;
@@ -94,6 +98,22 @@
         .footer .core-team {
             color: white;
             text-shadow: 0 0 5px yellow;
+        }
+
+        @media (min-width: 768px) {
+            .prototype-section {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .prototype-video, .prototype-summary {
+                width: 45%;
+            }
+
+            .footer {
+                flex-direction: row;
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
