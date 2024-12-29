@@ -49,8 +49,8 @@
 
         .prototype-video {
             width: 90%;
-            max-width: 400px;
-            height: auto;
+            max-width: 600px;
+            height: 337px; /* 16:9 aspect ratio for larger video */
             border: 2px solid #ccc;
         }
 
@@ -106,7 +106,13 @@
                 justify-content: space-between;
             }
 
-            .prototype-video, .prototype-summary {
+            .prototype-video {
+                width: 50%;
+                max-width: 600px;
+                height: auto;
+            }
+
+            .prototype-summary {
                 width: 45%;
             }
 
