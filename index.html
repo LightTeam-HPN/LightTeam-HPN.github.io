@@ -57,12 +57,13 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
+        /* Popup styling */
         .popup {
             display: none;
             position: absolute;
-            top: 100%; /* Positions the popup below the button */
+            top: 100%; /* Positioned just below the button */
             left: 0;
-            width: 100%; /* Ensures it reaches both left and right edges */
+            width: 100%; /* Ensures the popup reaches both left and right edges */
             background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
@@ -71,7 +72,7 @@
             z-index: 1000;
             box-shadow: 0 0 10px rgba(128, 128, 128, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
             animation: rainbowText 5s infinite linear;
-            border: none; /* Removed the yellow border line */
+            border: none; /* Removed yellow border */
         }
 
         @keyframes rainbowText {
@@ -88,6 +89,7 @@
             display: block;
         }
 
+        /* Styling the popup text for better readability */
         .popup-text {
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Add shadow to make text easier to read */
         }
@@ -205,7 +207,7 @@
         // Close popup if clicked outside (for mobile)
         function closePopup(event) {
             const popup = document.getElementById('popup');
-            if (!popup.contains(event.target)) {
+            if (!popup.contains(event.target) && !document.querySelector('.popup-button').contains(event.target)) {
                 popup.classList.remove('active');
             }
         }
