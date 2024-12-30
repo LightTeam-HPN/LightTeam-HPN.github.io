@@ -139,7 +139,6 @@
 
         .footer {
             display: flex;
-            flex-direction: row;
             justify-content: space-between;
             padding: 10px;
             background-color: black;
@@ -292,21 +291,11 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button id="newsButton" class="popup-button" onmouseenter="handleMouseEnter()" onmouseleave="handleMouseLeave()" onclick="togglePopup()">News</button>
+        <button id="newsButton" class="popup-button" onclick="togglePopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
         <div id="popupText">Welcome to the news popup</div>
-        <div class="footer">
-            <div class="contacts">
-                <span>Contact: </span>
-                <span class="gmail">hpnlighteam@gmail.com</span>
-            </div>
-            <div class="core-team">
-                <span>Core Team: </span>
-                <span>Haridas, Pranav, Nitai</span>
-            </div>
-        </div>
         <button onclick="openSettings()">Settings</button>
     </div>
 
@@ -338,11 +327,25 @@
     <div class="content">
         <div class="prototype-section">
             <div class="prototype-video">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="prototype-summary">Summary of the prototype</div>
+            <div class="prototype-summary">
+                <h3>Prototype Summary</h3>
+                <p>Description of your prototype goes here.</p>
+            </div>
         </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform?usp=dialog" target="_blank" class="interest-button">Interest Form</a>
+        <a href="#" class="interest-button">I am Interested</a>
+    </div>
+
+    <div class="footer">
+        <div class="contacts">
+            <span class="gmail">hpn@example.com</span>
+        </div>
+        <div class="core-team">
+            <span>Haridas</span>
+            <span>Pranav</span>
+            <span>Nitai</span>
+        </div>
     </div>
 </body>
 </html>
