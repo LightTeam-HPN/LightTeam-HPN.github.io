@@ -239,37 +239,29 @@
             const selectedColor = colorSelect.value;
 
             // Change text color
+            let bgColor = '#121212';  // Default background
+
             if (selectedColor === 'Rainbow') {
-                popup.style.animation = 'rainbowText 5s infinite linear';
-                popupContent.style.color = "white"; // Reset to default
-            } else {
-                popup.style.animation = 'none';
-                popupContent.style.color = selectedColor;
+                popupContent.style.color = 'transparent';
+                popup.style.background = 'linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)';
+            } else if (selectedColor === 'White') {
+                popupContent.style.color = 'white';
+                bgColor = '#333';
+            } else if (selectedColor === 'Orange') {
+                popupContent.style.color = 'orange';
+                bgColor = '#1a1a1a';
+            } else if (selectedColor === 'Blue') {
+                popupContent.style.color = 'blue';
+                bgColor = '#2c3e50';
+            } else if (selectedColor === 'Pink') {
+                popupContent.style.color = 'pink';
+                bgColor = '#424242';
+            } else if (selectedColor === 'Black') {
+                popupContent.style.color = 'black';
+                bgColor = '#ffffff';
             }
 
-            // Change background color based on text color
-            switch (selectedColor) {
-                case 'Rainbow':
-                    document.body.style.backgroundColor = '#121212';
-                    break;
-                case 'White':
-                    document.body.style.backgroundColor = '#000';
-                    break;
-                case 'Orange':
-                    document.body.style.backgroundColor = '#FF5733';
-                    break;
-                case 'Blue':
-                    document.body.style.backgroundColor = '#3498DB';
-                    break;
-                case 'Pink':
-                    document.body.style.backgroundColor = '#FF1493';
-                    break;
-                case 'Black':
-                    document.body.style.backgroundColor = '#333';
-                    break;
-                default:
-                    document.body.style.backgroundColor = '#121212';
-            }
+            popup.style.backgroundColor = bgColor;
         }
 
         function changeEffect() {
