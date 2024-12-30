@@ -51,9 +51,9 @@
         .popup {
             display: none;
             position: fixed;
-            top: 50%;
+            top: 0;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             width: 50%;
             height: 50%;
             background-color: black;
@@ -64,7 +64,7 @@
             padding: 20px;
             text-align: center;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(128, 128, 128, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
             animation: rainbowText 5s infinite linear;
         }
 
@@ -80,6 +80,10 @@
 
         .popup.active {
             display: block;
+        }
+
+        .popup-text {
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Add shadow to make text easier to read */
         }
 
         .content {
@@ -180,10 +184,28 @@
         }
     </style>
     <script>
+        // Toggle popup on hover for desktop
         function togglePopup() {
             const popup = document.getElementById('popup');
             popup.classList.toggle('active');
         }
+
+        // Show popup on click (for mobile)
+        function openPopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.add('active');
+        }
+
+        // Close popup if clicked outside (for mobile)
+        function closePopup(event) {
+            const popup = document.getElementById('popup');
+            if (!popup.contains(event.target)) {
+                popup.classList.remove('active');
+            }
+        }
+
+        // Add event listener to close popup when clicking outside on mobile
+        document.addEventListener('click', closePopup);
     </script>
 </head>
 <body>
@@ -191,11 +213,15 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button class="popup-button" onclick="togglePopup()">Info</button>
+        <!-- Update the button text to News -->
+        <button class="popup-button" 
+                onmouseover="togglePopup()" 
+                onmouseout="togglePopup()" 
+                onclick="openPopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
-        None as of now, but stay tuned for more.
+        <div class="popup-text">None as of now, but stay tuned for more.</div>
     </div>
 
     <div class="content">
