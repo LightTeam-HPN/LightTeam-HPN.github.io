@@ -22,12 +22,63 @@
             color: white;
             font-size: 1.5em;
             font-weight: bold;
+            position: relative;
         }
 
         .header .company-name {
             margin-left: 10px;
             color: white;
             text-shadow: 0 0 5px yellow;
+        }
+
+        .header .popup-button {
+            margin-left: auto;
+            padding: 10px 15px;
+            background-color: transparent;
+            color: white;
+            text-shadow: 0 0 5px yellow;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .header .popup-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            background-color: black;
+            color: white;
+            text-shadow: 0 0 5px yellow;
+            border: 2px solid yellow;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: rainbowText 5s infinite linear;
+        }
+
+        @keyframes rainbowText {
+            0% { color: red; }
+            16% { color: orange; }
+            33% { color: yellow; }
+            50% { color: green; }
+            66% { color: blue; }
+            83% { color: indigo; }
+            100% { color: violet; }
+        }
+
+        .popup.active {
+            display: block;
         }
 
         .content {
@@ -127,12 +178,23 @@
             }
         }
     </style>
+    <script>
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.toggle('active');
+        }
+    </script>
 </head>
 <body>
     <div class="header">
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
+        <button class="popup-button" onclick="togglePopup()">Info</button>
+    </div>
+
+    <div id="popup" class="popup">
+        None as of now, but stay tuned for more.
     </div>
 
     <div class="content">
