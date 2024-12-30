@@ -8,12 +8,16 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
         }
 
         .header {
             display: flex;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             background-color: black;
             color: white;
             font-size: 1.5em;
@@ -27,15 +31,9 @@
             text-shadow: 0 0 5px yellow;
         }
 
-        .header .separator {
-            color: white;
-            margin: 0 10px;
-        }
-
         .header .popup-button {
             position: absolute;
             right: 10px;
-            top: 10px;
             padding: 10px 15px;
             background-color: transparent;
             color: white;
@@ -44,94 +42,48 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            animation: yellowShade 2s infinite linear;
         }
 
-        @keyframes yellowShade {
-            0% { background-color: #FFEB3B; }
-            25% { background-color: #FFDA00; }
-            50% { background-color: #FFCD00; }
-            75% { background-color: #FFB300; }
-            100% { background-color: #FFEB3B; }
+        .header .popup-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Popup styling */
         .popup {
             display: none;
-            position: absolute;
-            top: 60px;
-            right: 10px;
-            width: 300px;
-            height: 150px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
             background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
-            padding: 20px;
-            text-align: center;
+            animation: rainbowText 5s infinite linear;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(128, 128, 128, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-            border: none;
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: scroll;
         }
 
         .popup.active {
             display: block;
         }
 
-        .popup-text {
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Settings Popup */
-        .settings-popup {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background-color: white;
-            color: black;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 2000;
+        .popup .popup-content {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
             text-align: center;
-            border-radius: 8px;
         }
 
-        .settings-popup.active {
-            display: block;
-        }
-
-        .close-button {
-            background-color: red;
-            color: white;
-            font-size: 1.2em;
-            width: 30px;
-            height: 30px;
-            border: none;
-            border-radius: 50%;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            animation: flashingRed 1s infinite alternate;
-        }
-
-        @keyframes flashingRed {
-            0% { background-color: red; }
-            100% { background-color: darkred; }
-        }
-
-        .settings-popup label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .settings-popup select {
-            margin-top: 5px;
-            padding: 5px;
-            width: 100%;
+        @keyframes rainbowText {
+            0% { color: red; }
+            16% { color: orange; }
+            33% { color: yellow; }
+            50% { color: green; }
+            66% { color: blue; }
+            83% { color: indigo; }
+            100% { color: violet; }
         }
 
         .content {
@@ -168,6 +120,63 @@
             text-shadow: 0 0 5px yellow;
         }
 
+        .footer .core-team {
+            color: white;
+        }
+
+        .popup-settings {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            background-color: black;
+            color: white;
+            text-shadow: 0 0 5px yellow;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1001;
+        }
+
+        .popup-settings.active {
+            display: block;
+        }
+
+        .popup-settings select {
+            margin: 10px;
+        }
+
+        .popup-settings .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .interest-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .interest-button:hover {
+            background-color: #0056b3;
+        }
+
         @media (min-width: 768px) {
             .footer {
                 flex-direction: row;
@@ -176,153 +185,51 @@
         }
     </style>
     <script>
-        // Trigger popup on hover
-        const newsButton = document.querySelector('.popup-button');
-        const popup = document.getElementById('popup');
-        const popupText = popup.querySelector('.popup-text');
+        let newsButtonHovered = false;
 
-        newsButton.addEventListener('mouseover', () => {
-            popup.classList.add('active');
-            applySelectedSettings(); // Apply selected settings on hover
-        });
-
-        newsButton.addEventListener('mouseout', () => {
-            popup.classList.remove('active');
-        });
-
-        // Open settings popup
-        function openSettings() {
-            const settingsPopup = document.getElementById('settings-popup');
-            settingsPopup.classList.add('active');
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.toggle('active');
         }
 
-        // Close settings popup and apply selected settings
+        function toggleSettings() {
+            const settingsPopup = document.getElementById('settings-popup');
+            settingsPopup.classList.toggle('active');
+        }
+
+        function changeColor() {
+            const colorSelect = document.getElementById('colorSelect');
+            const popup = document.getElementById('popup');
+            const popupContent = document.querySelector('.popup-content');
+            const selectedColor = colorSelect.value;
+
+            if (selectedColor === 'Rainbow') {
+                popup.style.animation = 'rainbowText 5s infinite linear';
+            } else {
+                popup.style.animation = 'none';
+                popupContent.style.color = selectedColor;
+            }
+        }
+
+        function changeEffect() {
+            const effectSelect = document.getElementById('effectSelect');
+            const popup = document.getElementById('popup');
+            const selectedEffect = effectSelect.value;
+
+            if (selectedEffect === 'Slam') {
+                popup.style.animation = 'slam 1s forwards';
+            } else if (selectedEffect === 'Appear') {
+                popup.style.animation = 'appear 1s forwards';
+            } else if (selectedEffect === 'Zoom In') {
+                popup.style.animation = 'zoomIn 1s forwards';
+            } else {
+                popup.style.animation = 'none';
+            }
+        }
+
         function closeSettings() {
             const settingsPopup = document.getElementById('settings-popup');
             settingsPopup.classList.remove('active');
-            updateSettings(); // Apply the selected settings
-        }
-
-        // Update settings based on selected values
-        function updateSettings() {
-            const color = document.getElementById('color-select').value;
-            const effect = document.getElementById('effect-select').value;
-
-            // Change text color and background based on selection
-            switch (color) {
-                case 'rainbow':
-                    popupText.style.color = 'transparent';
-                    popup.style.background = 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)';
-                    popup.style.backgroundClip = 'text';
-                    popup.style.color = 'transparent';
-                    break;
-                case 'white':
-                    popupText.style.color = 'white';
-                    popup.style.background = 'black';
-                    break;
-                case 'orange':
-                    popupText.style.color = 'orange';
-                    popup.style.background = 'black';
-                    break;
-                case 'blue':
-                    popupText.style.color = 'blue';
-                    popup.style.background = 'black';
-                    break;
-                case 'pink':
-                    popupText.style.color = 'pink';
-                    popup.style.background = 'black';
-                    break;
-                case 'black':
-                    popupText.style.color = 'black';
-                    popup.style.background = 'white';
-                    break;
-            }
-
-            // Apply effect based on selection
-            switch (effect) {
-                case 'slam':
-                    popupText.style.animation = 'slamIn 1s ease-out';
-                    break;
-                case 'appear':
-                    popupText.style.animation = 'fadeIn 1s ease-out';
-                    break;
-                case 'zoom':
-                    popupText.style.animation = 'zoomIn 1s ease-out';
-                    break;
-                case 'none':
-                    popupText.style.animation = 'none';
-                    break;
-            }
-        }
-
-        // Apply the slam effect
-        @keyframes slamIn {
-            0% { transform: translateY(-100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        // Apply the zoom effect
-        @keyframes zoomIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        // Apply the fade effect
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        // Apply selected settings when hovering
-        function applySelectedSettings() {
-            const color = document.getElementById('color-select').value;
-            const effect = document.getElementById('effect-select').value;
-
-            // Change text color and background based on selection
-            switch (color) {
-                case 'rainbow':
-                    popupText.style.color = 'transparent';
-                    popup.style.background = 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)';
-                    popup.style.backgroundClip = 'text';
-                    popup.style.color = 'transparent';
-                    break;
-                case 'white':
-                    popupText.style.color = 'white';
-                    popup.style.background = 'black';
-                    break;
-                case 'orange':
-                    popupText.style.color = 'orange';
-                    popup.style.background = 'black';
-                    break;
-                case 'blue':
-                    popupText.style.color = 'blue';
-                    popup.style.background = 'black';
-                    break;
-                case 'pink':
-                    popupText.style.color = 'pink';
-                    popup.style.background = 'black';
-                    break;
-                case 'black':
-                    popupText.style.color = 'black';
-                    popup.style.background = 'white';
-                    break;
-            }
-
-            // Apply effect based on selection
-            switch (effect) {
-                case 'slam':
-                    popupText.style.animation = 'slamIn 1s ease-out';
-                    break;
-                case 'appear':
-                    popupText.style.animation = 'fadeIn 1s ease-out';
-                    break;
-                case 'zoom':
-                    popupText.style.animation = 'zoomIn 1s ease-out';
-                    break;
-                case 'none':
-                    popupText.style.animation = 'none';
-                    break;
-            }
         }
     </script>
 </head>
@@ -331,36 +238,16 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button class="popup-button">News</button>
+        <button class="popup-button" onmouseover="togglePopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
-        <div class="popup-text">None as of now, but stay tuned for more.</div>
-        <button onclick="openSettings()">Settings</button>
-    </div>
-
-    <!-- Settings Popup -->
-    <div id="settings-popup" class="settings-popup">
-        <button class="close-button" onclick="closeSettings()">X</button>
-        <h3>Settings</h3>
-
-        <label for="color-select">Color:</label>
-        <select id="color-select">
-            <option value="rainbow">Rainbow</option>
-            <option value="white">White</option>
-            <option value="orange">Orange</option>
-            <option value="blue">Blue</option>
-            <option value="pink">Pink</option>
-            <option value="black">Black</option>
-        </select>
-
-        <label for="effect-select">Effects:</label>
-        <select id="effect-select">
-            <option value="slam">Slam</option>
-            <option value="appear">Appear</option>
-            <option value="zoom">Zoom In</option>
-            <option value="none">None</option>
-        </select>
+        <div class="popup-content">
+            Welcome to our news section! Stay tuned for updates.
+            <div style="position: absolute; bottom: 10px; right: 10px; font-size: 0.8em;">
+                <span style="cursor: pointer; text-decoration: underline;" onclick="toggleSettings()">Settings</span>
+            </div>
+        </div>
     </div>
 
     <div class="content">
@@ -373,10 +260,35 @@
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform?usp=dialog" target="_blank" class="interest-button">Interest Form</a>
     </div>
 
+    <div id="settings-popup" class="popup-settings">
+        <button class="close-btn" onclick="closeSettings()">X</button>
+        <h2>Settings</h2>
+        <div>
+            <label for="colorSelect">Color: </label>
+            <select id="colorSelect" onchange="changeColor()">
+                <option value="Rainbow">Rainbow</option>
+                <option value="White">White</option>
+                <option value="Orange">Orange</option>
+                <option value="Blue">Blue</option>
+                <option value="Pink">Pink</option>
+                <option value="Black">Black</option>
+            </select>
+        </div>
+        <div>
+            <label for="effectSelect">Effects: </label>
+            <select id="effectSelect" onchange="changeEffect()">
+                <option value="Slam">Slam</option>
+                <option value="Appear">Appear</option>
+                <option value="Zoom In">Zoom In</option>
+                <option value="None">None</option>
+            </select>
+        </div>
+    </div>
+
     <div class="footer">
         <div class="contacts">
             <span>Contacts:</span>
-            <span class="gmail">jaina.ramya@gmail.com</span>
+            <span class="gmail">hpnlighteam@gmail.com</span>
         </div>
         <div class="core-team">Core Team: Haridas, Pranav, Nitai</div>
     </div>
