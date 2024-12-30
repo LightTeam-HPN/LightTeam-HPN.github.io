@@ -17,19 +17,24 @@
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             padding: 10px;
             background-color: black;
             color: white;
             font-size: 1.5em;
             font-weight: bold;
             position: relative;
+            justify-content: flex-start; /* Align elements to the left */
         }
 
         .header .company-name {
             margin-left: 10px;
             color: white;
             text-shadow: 0 0 5px yellow;
+        }
+
+        .header .separator {
+            color: white;
+            margin: 0 10px;
         }
 
         /* Positioning the News button at the top-right corner without affecting the company name */
