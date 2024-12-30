@@ -32,7 +32,7 @@
         }
 
         .header .popup-button {
-            position: absolute;
+            position: relative;
             right: 10px;
             padding: 10px 15px;
             background-color: transparent;
@@ -59,11 +59,10 @@
 
         .popup {
             display: none;
-            position: fixed;
-            top: -10%; /* Makes the popup appear a little higher */
+            position: absolute;
+            top: 100%; /* Positions the popup below the button */
             left: 0;
-            width: 100%; /* Reaches both left and right edges */
-            height: auto;
+            width: 100%; /* Ensures it reaches both left and right edges */
             background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
