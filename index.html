@@ -77,13 +77,7 @@
             padding: 20px;
             text-align: center;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            animation: slamPopup 0.5s ease-in-out;
-        }
-
-        @keyframes slamPopup {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            100% { transform: translate(-50%, -50%) scale(1); }
+            animation: none;
         }
 
         .popup.active {
@@ -98,45 +92,6 @@
             padding: 20px;
         }
 
-        .prototype-section {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .prototype-video {
-            width: 50%;
-            max-width: 600px;
-            height: 337px;
-            border: 2px solid #ccc;
-        }
-
-        .prototype-summary {
-            width: 45%;
-            font-size: 1.2em;
-            text-align: center;
-        }
-
-        .interest-button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 1em;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .interest-button:hover {
-            background-color: #0056b3;
-        }
-
         .footer {
             display: flex;
             justify-content: space-between;
@@ -147,18 +102,6 @@
         }
 
         .footer .contacts {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .footer .core-team {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .footer .gmail {
             text-shadow: 0 0 5px yellow;
         }
 
@@ -196,11 +139,18 @@
         }
     </style>
     <script>
-        let newMessage = false;
+        let newMessage = true;
 
         function togglePopup() {
             const popup = document.getElementById('popup');
+            const newsButton = document.getElementById('newsButton');
+
             popup.classList.toggle('active');
+            if (newMessage) {
+                newMessage = false;
+                newsButton.classList.remove('red');
+                newsButton.classList.add('yellow');
+            }
         }
 
         function openSettings() {
@@ -213,69 +163,46 @@
             settingsPopup.classList.remove('active');
         }
 
-        function changeTextColor() {
+        function adjustPopupAppearance() {
             const selectedColor = document.getElementById('colorSelect').value;
             const popupText = document.getElementById('popupText');
-            const body = document.body;
-
-            if (selectedColor === 'Rainbow') {
-                popupText.style.color = 'white';
-                popupText.style.backgroundColor = 'black';
-            } else if (selectedColor === 'White') {
-                popupText.style.color = 'white';
-                body.style.backgroundColor = 'black';
-            } else if (selectedColor === 'Orange') {
-                popupText.style.color = 'orange';
-                body.style.backgroundColor = 'black';
-            } else if (selectedColor === 'Blue') {
-                popupText.style.color = 'blue';
-                body.style.backgroundColor = 'black';
-            } else if (selectedColor === 'Pink') {
-                popupText.style.color = 'pink';
-                body.style.backgroundColor = 'black';
-            } else if (selectedColor === 'Black') {
-                popupText.style.color = 'black';
-                body.style.backgroundColor = 'white';
-            }
-        }
-
-        function changeEffect() {
-            const selectedEffect = document.getElementById('effectSelect').value;
             const popup = document.getElementById('popup');
 
-            if (selectedEffect === 'Slam') {
-                popup.style.animation = 'slamPopup 0.5s ease-in-out';
-            } else if (selectedEffect === 'Appear') {
-                popup.style.animation = 'none';
-                popup.style.opacity = 1;
-            } else if (selectedEffect === 'Zoom In') {
-                popup.style.animation = 'zoomIn 0.5s ease-in-out';
-            } else {
-                popup.style.animation = 'none';
-            }
-        }
+            let backgroundColor = 'white'; // Default background
 
-        function handleMouseEnter() {
-            const newsButton = document.getElementById('newsButton');
-            const popup = document.getElementById('popup');
-            if (newMessage) {
-                newsButton.classList.add('red');
-                newsButton.classList.remove('yellow');
-            } else {
-                newsButton.classList.add('yellow');
-                newsButton.classList.remove('red');
+            switch (selectedColor) {
+                case 'Rainbow':
+                    popupText.style.color = 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)';
+                    backgroundColor = 'black';
+                    break;
+                case 'White':
+                    popupText.style.color = 'white';
+                    backgroundColor = 'black';
+                    break;
+                case 'Orange':
+                    popupText.style.color = 'orange';
+                    backgroundColor = 'black';
+                    break;
+                case 'Blue':
+                    popupText.style.color = 'blue';
+                    backgroundColor = 'white';
+                    break;
+                case 'Pink':
+                    popupText.style.color = 'pink';
+                    backgroundColor = 'black';
+                    break;
+                case 'Black':
+                    popupText.style.color = 'black';
+                    backgroundColor = 'white';
+                    break;
             }
-            popup.classList.add('active');
-        }
 
-        function handleMouseLeave() {
-            const popup = document.getElementById('popup');
-            popup.classList.remove('active');
+            popup.style.backgroundColor = backgroundColor;
         }
 
         function toggleNewMessage() {
-            newMessage = !newMessage;
             const newsButton = document.getElementById('newsButton');
+            newMessage = !newMessage;
             if (newMessage) {
                 newsButton.classList.add('red');
                 newsButton.classList.remove('yellow');
@@ -291,11 +218,11 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button id="newsButton" class="popup-button" onclick="togglePopup()">News</button>
+        <button id="newsButton" class="popup-button red" onclick="togglePopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
-        <div id="popupText">Welcome to the news popup</div>
+        <div id="popupText">Welcome to the news popup!</div>
         <button onclick="openSettings()">Settings</button>
     </div>
 
@@ -304,7 +231,7 @@
         <h3>Settings</h3>
         <div>
             <label for="colorSelect">Color: </label>
-            <select id="colorSelect" onchange="changeTextColor()">
+            <select id="colorSelect" onchange="adjustPopupAppearance()">
                 <option value="Rainbow">Rainbow</option>
                 <option value="White">White</option>
                 <option value="Orange">Orange</option>
@@ -313,33 +240,11 @@
                 <option value="Black">Black</option>
             </select>
         </div>
-        <div>
-            <label for="effectSelect">Effects: </label>
-            <select id="effectSelect" onchange="changeEffect()">
-                <option value="Slam">Slam</option>
-                <option value="Appear">Appear</option>
-                <option value="Zoom In">Zoom In</option>
-                <option value="None">None</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="prototype-section">
-            <div class="prototype-video">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="prototype-summary">
-                <h3>Prototype Summary</h3>
-                <p>Description of your prototype goes here.</p>
-            </div>
-        </div>
-        <a href="#" class="interest-button">I am Interested</a>
     </div>
 
     <div class="footer">
         <div class="contacts">
-            <span class="gmail">hpn@example.com</span>
+            <span class="gmail">hpn@gmail.com</span>
         </div>
         <div class="core-team">
             <span>Haridas</span>
