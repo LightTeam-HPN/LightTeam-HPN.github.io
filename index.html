@@ -42,6 +42,15 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
+            animation: yellowShade 2s infinite linear; /* Animation for changing yellow shades */
+        }
+
+        @keyframes yellowShade {
+            0% { background-color: #FFEB3B; }
+            25% { background-color: #FFDA00; }
+            50% { background-color: #FFCD00; }
+            75% { background-color: #FFB300; }
+            100% { background-color: #FFEB3B; }
         }
 
         .header .popup-button:hover {
