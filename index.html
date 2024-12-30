@@ -17,7 +17,7 @@
         .header {
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 20px;  /* Increased padding for larger header */
             background-color: black;
             color: white;
             font-size: 1.5em;
@@ -63,6 +63,16 @@
 
         .header .popup-button:hover {
             background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Flashing red for new messages */
+        .popup-button.flash-red {
+            animation: redFlash 1s infinite alternate;
+        }
+
+        @keyframes redFlash {
+            0% { background-color: red; }
+            100% { background-color: darkred; }
         }
 
         /* Popup styling */
@@ -223,6 +233,20 @@
 
         // Add event listener to close popup when clicking outside on mobile
         document.addEventListener('click', closePopup);
+
+        // Trigger flashing red effect on new message
+        function showNewMessage() {
+            const newsButton = document.querySelector('.popup-button');
+            newsButton.classList.add('flash-red');  // Add the flashing red effect
+
+            // Remove the flashing effect after 5 seconds
+            setTimeout(() => {
+                newsButton.classList.remove('flash-red');
+            }, 5000);
+        }
+
+        // For demonstration purposes, simulate a new message
+        setTimeout(showNewMessage, 3000);  // Simulate new message after 3 seconds
     </script>
 </head>
 <body>
