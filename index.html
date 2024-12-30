@@ -52,9 +52,9 @@
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
             background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
@@ -63,6 +63,7 @@
             padding: 20px;
             box-sizing: border-box;
             overflow-y: scroll;
+            border-radius: 10px;
         }
 
         .popup.active {
@@ -70,10 +71,8 @@
         }
 
         .popup .popup-content {
-            width: 80%;
-            margin: 0 auto;
-            padding: 10px;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         @keyframes rainbowText {
@@ -92,6 +91,44 @@
             align-items: center;
             flex: 1;
             padding: 20px;
+        }
+
+        .prototype-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .prototype-video {
+            width: 50%;
+            height: 337px;
+            border: 2px solid #ccc;
+        }
+
+        .prototype-summary {
+            width: 45%;
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        .interest-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .interest-button:hover {
+            background-color: #0056b3;
         }
 
         .footer {
@@ -157,24 +194,6 @@
             border-radius: 50%;
             padding: 5px;
             cursor: pointer;
-        }
-
-        .interest-button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 1em;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .interest-button:hover {
-            background-color: #0056b3;
         }
 
         @media (min-width: 768px) {
