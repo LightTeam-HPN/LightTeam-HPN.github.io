@@ -8,11 +8,11 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: white; /* Main page background remains white */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100vh;
-            background-color: white; /* Main page background remains white */
         }
 
         .header {
@@ -28,11 +28,9 @@
 
         .header .company-name {
             margin-left: 10px;
-            color: white;
-            text-shadow: 0 0 5px yellow;
         }
 
-        .header .popup-button {
+        .popup-button {
             position: absolute;
             right: 10px;
             padding: 10px 15px;
@@ -55,10 +53,10 @@
         .popup {
             display: none;
             position: fixed;
-            top: 50px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50%;
+            width: 40%;
             background-color: black; /* Default popup background */
             color: white;
             text-shadow: 0 0 5px yellow;
@@ -75,7 +73,7 @@
             opacity: 1;
         }
 
-        .popup .popup-content {
+        .popup-content {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -93,12 +91,10 @@
             padding: 20px;
             border-radius: 10px;
             z-index: 1001;
-            transition: opacity 0.5s ease-in-out;
         }
 
         .popup-settings.active {
             display: block;
-            opacity: 1;
         }
 
         .popup-settings select {
@@ -140,84 +136,24 @@
             100% { transform: translateX(5px); }
         }
 
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            padding: 20px;
-        }
-
-        .prototype-section {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .prototype-video {
-            width: 50%;
-            height: 337px;
-            border: 2px solid #ccc;
-        }
-
-        .prototype-summary {
-            width: 45%;
-            font-size: 1.2em;
-            text-align: left;
-        }
-
-        .interest-button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 1em;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .interest-button:hover {
-            background-color: #0056b3;
-        }
-
         .footer {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            padding: 10px;
             background-color: black;
+            color: white;
+            padding: 10px;
             font-size: 0.9em;
         }
 
         .footer .contacts {
             color: white;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .footer .gmail {
-            color: white;
-            text-shadow: 0 0 5px yellow;
         }
 
         .footer .core-team {
             color: white;
-            text-shadow: 0 0 5px yellow;
         }
 
-        @media (min-width: 768px) {
-            .footer {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
     </style>
     <script>
         let newsButtonHovered = false;
@@ -299,7 +235,6 @@
 <body>
     <div class="header">
         <div>Logo</div>
-        <div class="separator">|</div>
         <div class="company-name">HPN</div>
         <button class="popup-button">News</button>
     </div>
@@ -313,14 +248,12 @@
         </div>
     </div>
 
-    <div class="content">
-        <div class="prototype-section">
-            <div class="prototype-video">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="prototype-summary">Summary of the prototype</div>
+    <div class="footer">
+        <div class="contacts">
+            <span>Contacts:</span>
+            <span>hpnlighteam@gmail.com</span>
         </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform?usp=dialog" target="_blank" class="interest-button">Interest Form</a>
+        <div class="core-team">Core Team: Haridas, Pranav, Nitai</div>
     </div>
 
     <div id="settings-popup" class="popup-settings">
@@ -347,14 +280,6 @@
                 <option value="None">None</option>
             </select>
         </div>
-    </div>
-
-    <div class="footer">
-        <div class="contacts">
-            <span>Contacts:</span>
-            <span class="gmail">hpnlighteam@gmail.com</span>
-        </div>
-        <div class="core-team">Core Team: Haridas, Pranav, Nitai</div>
     </div>
 </body>
 </html>
