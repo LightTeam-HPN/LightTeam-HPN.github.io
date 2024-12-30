@@ -154,6 +154,28 @@
             color: white;
         }
 
+        /* Video and Summary Section */
+        .video-summary-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .video-container {
+            width: 60%;
+        }
+
+        .summary-container {
+            width: 35%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+        }
+        
+        .summary-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
     </style>
     <script>
         let newsButtonHovered = false;
@@ -236,6 +258,16 @@
         <div>Logo</div>
         <div class="company-name">HPN</div>
         <button class="popup-button">News</button>
+    </div>
+
+    <div class="video-summary-container">
+        <div class="video-container">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Company Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="summary-container">
+            <h2>Company Summary</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia quam at urna congue tincidunt. Phasellus vehicula felis neque, sed feugiat metus tempus nec.</p>
+        </div>
     </div>
 
     <div id="popup" class="popup">
