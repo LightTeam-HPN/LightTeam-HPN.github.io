@@ -8,17 +8,17 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: white;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100vh;
+            background-color: white; /* Ensure the background is white */
         }
 
         .header {
             display: flex;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
             background-color: black;
             color: white;
             font-size: 1.5em;
@@ -28,9 +28,11 @@
 
         .header .company-name {
             margin-left: 10px;
+            color: white;
+            text-shadow: 0 0 5px yellow;
         }
 
-        .popup-button {
+        .header .popup-button {
             position: absolute;
             right: 10px;
             padding: 10px 15px;
@@ -41,276 +43,154 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            animation: flashingYellow 1s infinite alternate;
         }
 
-        @keyframes flashingYellow {
-            0% { background-color: #FFD700; }
-            50% { background-color: #FFDD44; }
-            100% { background-color: #FFCC00; }
+        .header .popup-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .popup {
             display: none;
             position: fixed;
-            top: 100px;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
-            width: 40%;
-            background-color: #333;
+            width: 50%;
+            background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: scroll;
             border-radius: 10px;
+            padding: 20px;
+            text-align: center;
             z-index: 1000;
-            transition: opacity 0.5s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: rainbowText 5s infinite linear;
         }
 
         .popup.active {
             display: block;
-            opacity: 1;
         }
 
-        .popup-content {
-            text-align: center;
-            margin-bottom: 20px;
+        @keyframes rainbowText {
+            0% { color: red; }
+            16% { color: orange; }
+            33% { color: yellow; }
+            50% { color: green; }
+            66% { color: blue; }
+            83% { color: indigo; }
+            100% { color: violet; }
         }
 
-        .popup-settings {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40%;
-            background-color: black;
-            color: white;
-            text-shadow: 0 0 5px yellow;
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
             padding: 20px;
-            border-radius: 10px;
-            z-index: 1001;
         }
 
-        .popup-settings.active {
-            display: block;
+        .prototype-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
         }
 
-        .popup-settings select {
-            margin: 10px;
+        .prototype-video {
+            width: 50%;
+            height: 337px; /* 16:9 aspect ratio for larger video */
+            border: 2px solid #ccc;
         }
 
-        .popup-settings .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: red;
+        .prototype-summary {
+            width: 45%;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .interest-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #007BFF;
             color: white;
             border: none;
-            border-radius: 50%;
-            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
             cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        @keyframes slam {
-            0% { transform: translateY(-100%) rotate(0deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-
-        @keyframes appear {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes zoomIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(5px); }
+        .interest-button:hover {
+            background-color: #0056b3;
         }
 
         .footer {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            background-color: black;
-            color: white;
             padding: 10px;
+            background-color: black;
             font-size: 0.9em;
         }
 
         .footer .contacts {
             color: white;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .footer .gmail {
+            color: white;
+            text-shadow: 0 0 5px yellow;
         }
 
         .footer .core-team {
             color: white;
-        }
-
-        /* Video and Summary Section */
-        .video-summary-container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        .video-container {
-            width: 60%;
-        }
-
-        .summary-container {
-            width: 35%;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border-radius: 10px;
-        }
-        
-        .summary-container h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            text-shadow: 0 0 5px yellow;
         }
     </style>
     <script>
-        let newsButtonHovered = false;
-
-        function togglePopup(show) {
+        function togglePopup() {
             const popup = document.getElementById('popup');
-            if (show) {
-                popup.classList.add('active');
-            } else {
-                popup.classList.remove('active');
-            }
+            popup.classList.toggle('active');
         }
-
-        function toggleSettings() {
-            const settingsPopup = document.getElementById('settings-popup');
-            settingsPopup.classList.toggle('active');
-        }
-
-        function changeColor() {
-            const colorSelect = document.getElementById('colorSelect');
-            const popup = document.getElementById('popup');
-            const popupContent = document.querySelector('.popup-content');
-            const selectedColor = colorSelect.value;
-
-            let bgColor = '#121212';  // Default background
-
-            if (selectedColor === 'Rainbow') {
-                popupContent.style.color = 'transparent';
-                popup.style.background = 'linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)';
-            } else if (selectedColor === 'White') {
-                popupContent.style.color = 'white';
-                bgColor = '#333';
-            } else if (selectedColor === 'Orange') {
-                popupContent.style.color = 'orange';
-                bgColor = '#1a1a1a';
-            } else if (selectedColor === 'Blue') {
-                popupContent.style.color = 'blue';
-                bgColor = '#2c3e50';
-            } else if (selectedColor === 'Pink') {
-                popupContent.style.color = 'pink';
-                bgColor = '#424242';
-            } else if (selectedColor === 'Black') {
-                popupContent.style.color = 'black';
-                bgColor = '#ffffff';
-            }
-
-            popup.style.backgroundColor = bgColor;
-        }
-
-        function changeEffect() {
-            const effectSelect = document.getElementById('effectSelect');
-            const popup = document.getElementById('popup');
-            const selectedEffect = effectSelect.value;
-
-            if (selectedEffect === 'Slam') {
-                popup.style.animation = 'slam 1s forwards';
-            } else if (selectedEffect === 'Appear') {
-                popup.style.animation = 'appear 1s forwards';
-            } else if (selectedEffect === 'Zoom In') {
-                popup.style.animation = 'zoomIn 1s forwards';
-            } else if (selectedEffect === 'Shake') {
-                popup.style.animation = 'shake 1s infinite';
-            } else {
-                popup.style.animation = 'none';
-            }
-        }
-
-        function closeSettings() {
-            const settingsPopup = document.getElementById('settings-popup');
-            settingsPopup.classList.remove('active');
-        }
-
-        // Mouse enter/leave events to show/hide popup
-        document.querySelector('.popup-button').addEventListener('mouseenter', () => togglePopup(true));
-        document.querySelector('.popup-button').addEventListener('mouseleave', () => togglePopup(false));
     </script>
 </head>
 <body>
     <div class="header">
         <div>Logo</div>
+        <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button class="popup-button">News</button>
-    </div>
-
-    <div class="video-summary-container">
-        <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Company Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="summary-container">
-            <h2>Company Summary</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia quam at urna congue tincidunt. Phasellus vehicula felis neque, sed feugiat metus tempus nec.</p>
-        </div>
+        <button class="popup-button" onclick="togglePopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
-        <div class="popup-content">
-            Welcome to our news section! Stay tuned for updates.
-            <div style="position: absolute; bottom: 10px; right: 10px; font-size: 0.8em;">
-                <span style="cursor: pointer; text-decoration: underline;" onclick="toggleSettings()">Settings</span>
+        None as of now, but stay tuned for more.
+    </div>
+
+    <div class="content">
+        <div class="prototype-section">
+            <div class="prototype-video">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="prototype-summary">
+                Summary of the prototype.
             </div>
         </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform?usp=dialog" target="_blank" class="interest-button">Interest Form</a>
     </div>
 
     <div class="footer">
         <div class="contacts">
             <span>Contacts:</span>
-            <span>hpnlighteam@gmail.com</span>
+            <span class="gmail">hpnlighteam@gmail.com</span>
         </div>
         <div class="core-team">Core Team: Haridas, Pranav, Nitai</div>
-    </div>
-
-    <div id="settings-popup" class="popup-settings">
-        <button class="close-btn" onclick="closeSettings()">X</button>
-        <h2>Settings</h2>
-        <div>
-            <label for="colorSelect">Color: </label>
-            <select id="colorSelect" onchange="changeColor()">
-                <option value="Rainbow">Rainbow</option>
-                <option value="White">White</option>
-                <option value="Orange">Orange</option>
-                <option value="Blue">Blue</option>
-                <option value="Pink">Pink</option>
-                <option value="Black">Black</option>
-            </select>
-        </div>
-        <div>
-            <label for="effectSelect">Effects: </label>
-            <select id="effectSelect" onchange="changeEffect()">
-                <option value="Slam">Slam</option>
-                <option value="Appear">Appear</option>
-                <option value="Zoom In">Zoom In</option>
-                <option value="Shake">Shake</option>
-                <option value="None">None</option>
-            </select>
-        </div>
     </div>
 </body>
 </html>
