@@ -113,6 +113,34 @@
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Add shadow to make text easier to read */
         }
 
+        /* Different Animations for the text */
+        @keyframes slamIn {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateY(100%); opacity: 0; }
+            60% { transform: translateY(-30%); opacity: 1; }
+            100% { transform: translateY(0); }
+        }
+
+        /* Randomly applied animation class */
+        .popup-text.slam { animation: slamIn 1s ease-out; }
+        .popup-text.zoom { animation: zoomIn 1s ease-out; }
+        .popup-text.fade { animation: fadeIn 1s ease-out; }
+        .popup-text.bounce { animation: bounceIn 1s ease-out; }
+        
         .content {
             display: flex;
             flex-direction: column;
@@ -220,6 +248,18 @@
         // Show popup on click (for mobile)
         function openPopup() {
             const popup = document.getElementById('popup');
+            const text = popup.querySelector('.popup-text');
+            
+            // Randomly choose an animation
+            const animations = ['slam', 'zoom', 'fade', 'bounce'];
+            const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+
+            // Remove any previous animation class
+            text.classList.remove('slam', 'zoom', 'fade', 'bounce');
+
+            // Add a new random animation class
+            text.classList.add(randomAnimation);
+
             popup.classList.add('active');
         }
 
@@ -278,7 +318,7 @@
     <div class="footer">
         <div class="contacts">
             <span>Contacts:</span>
-            <span class="gmail">hpnlighteam@gmail.com</span>
+            <span class="gmail">jaina.ramya@gmail.com</span>
         </div>
         <div class="core-team">Core Team: Haridas, Pranav, Nitai</div>
     </div>
