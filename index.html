@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: white; /* Main page background remains white */
+            background-color: white;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -57,7 +57,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 40%;
-            background-color: black; /* Default popup background */
+            background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
             padding: 20px;
@@ -178,7 +178,6 @@
             const popupContent = document.querySelector('.popup-content');
             const selectedColor = colorSelect.value;
 
-            // Change text color and background color for readability
             let bgColor = '#121212';  // Default background
 
             if (selectedColor === 'Rainbow') {
