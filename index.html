@@ -43,44 +43,51 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
+        }
+
+        .popup-button.red {
+            animation: flashRed 1s infinite alternate;
+        }
+
+        .popup-button.yellow {
             animation: flashYellow 1s infinite alternate;
+        }
+
+        @keyframes flashRed {
+            0% { background-color: red; }
+            100% { background-color: transparent; }
         }
 
         @keyframes flashYellow {
             0% { background-color: yellow; }
-            100% { background-color: red; }
+            100% { background-color: transparent; }
         }
 
         .popup {
             display: none;
             position: fixed;
-            top: 10%;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             width: 50%;
+            height: 50%;
             background-color: black;
             color: white;
-            text-shadow: 0 0 5px yellow;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
             z-index: 1000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            animation: rainbowText 5s infinite linear;
+            animation: slamPopup 0.5s ease-in-out;
+        }
+
+        @keyframes slamPopup {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
         }
 
         .popup.active {
             display: block;
-        }
-
-        @keyframes rainbowText {
-            0% { color: red; }
-            16% { color: orange; }
-            33% { color: yellow; }
-            50% { color: green; }
-            66% { color: blue; }
-            83% { color: indigo; }
-            100% { color: violet; }
         }
 
         .content {
@@ -94,7 +101,6 @@
         .prototype-section {
             display: flex;
             flex-direction: row;
-            align-items: center;
             gap: 20px;
             width: 100%;
             margin-top: 20px;
@@ -102,6 +108,7 @@
 
         .prototype-video {
             width: 50%;
+            max-width: 600px;
             height: 337px;
             border: 2px solid #ccc;
         }
@@ -132,26 +139,31 @@
 
         .footer {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             padding: 10px;
             background-color: black;
             font-size: 0.9em;
+            color: white;
         }
 
         .footer .contacts {
-            color: white;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .footer .core-team {
             display: flex;
             gap: 10px;
             align-items: center;
         }
 
         .footer .gmail {
-            color: white;
             text-shadow: 0 0 5px yellow;
         }
 
-        .footer .core-team {
-            color: white;
+        .footer .core-team span {
             text-shadow: 0 0 5px yellow;
         }
 
@@ -163,28 +175,30 @@
             transform: translate(-50%, -50%);
             background-color: white;
             color: black;
+            border: 2px solid #007BFF;
             padding: 20px;
-            border-radius: 10px;
             width: 300px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             text-align: center;
+            border-radius: 10px;
+            z-index: 1001;
         }
 
         .settings-popup.active {
             display: block;
         }
 
-        .settings-popup button {
-            margin-top: 20px;
-            padding: 5px 10px;
+        .settings-popup .close-btn {
             background-color: red;
             color: white;
             border: none;
+            padding: 5px;
+            border-radius: 5px;
             cursor: pointer;
         }
-
     </style>
     <script>
+        let newMessage = false;
+
         function togglePopup() {
             const popup = document.getElementById('popup');
             popup.classList.toggle('active');
@@ -200,48 +214,76 @@
             settingsPopup.classList.remove('active');
         }
 
-        function updateTextColor(color) {
-            const popup = document.getElementById('popup');
-            popup.style.color = color;
-            updateBackgroundColor(color);
-        }
+        function changeTextColor() {
+            const selectedColor = document.getElementById('colorSelect').value;
+            const popupText = document.getElementById('popupText');
+            const body = document.body;
 
-        function updateBackgroundColor(color) {
-            let bgColor;
-            switch(color) {
-                case 'white':
-                    bgColor = 'black';
-                    break;
-                case 'yellow':
-                    bgColor = 'black';
-                    break;
-                case 'red':
-                    bgColor = 'black';
-                    break;
-                case 'blue':
-                    bgColor = 'white';
-                    break;
-                case 'green':
-                    bgColor = 'black';
-                    break;
-                case 'pink':
-                    bgColor = 'black';
-                    break;
-                default:
-                    bgColor = 'white';
+            if (selectedColor === 'Rainbow') {
+                popupText.style.color = 'white';
+                popupText.style.backgroundColor = 'black';
+            } else if (selectedColor === 'White') {
+                popupText.style.color = 'white';
+                body.style.backgroundColor = 'black';
+            } else if (selectedColor === 'Orange') {
+                popupText.style.color = 'orange';
+                body.style.backgroundColor = 'black';
+            } else if (selectedColor === 'Blue') {
+                popupText.style.color = 'blue';
+                body.style.backgroundColor = 'black';
+            } else if (selectedColor === 'Pink') {
+                popupText.style.color = 'pink';
+                body.style.backgroundColor = 'black';
+            } else if (selectedColor === 'Black') {
+                popupText.style.color = 'black';
+                body.style.backgroundColor = 'white';
             }
-            document.body.style.backgroundColor = bgColor;
         }
 
-        // Example of new news notification system
-        let isNewNews = true; // You can toggle this for testing
-        if (isNewNews) {
-            document.querySelector('.popup-button').style.animation = 'flashRed 1s infinite alternate';
+        function changeEffect() {
+            const selectedEffect = document.getElementById('effectSelect').value;
+            const popup = document.getElementById('popup');
+
+            if (selectedEffect === 'Slam') {
+                popup.style.animation = 'slamPopup 0.5s ease-in-out';
+            } else if (selectedEffect === 'Appear') {
+                popup.style.animation = 'none';
+                popup.style.opacity = 1;
+            } else if (selectedEffect === 'Zoom In') {
+                popup.style.animation = 'zoomIn 0.5s ease-in-out';
+            } else {
+                popup.style.animation = 'none';
+            }
         }
 
-        @keyframes flashRed {
-            0% { background-color: red; }
-            100% { background-color: yellow; }
+        function handleMouseEnter() {
+            const newsButton = document.getElementById('newsButton');
+            const popup = document.getElementById('popup');
+            if (newMessage) {
+                newsButton.classList.add('red');
+                newsButton.classList.remove('yellow');
+            } else {
+                newsButton.classList.add('yellow');
+                newsButton.classList.remove('red');
+            }
+            popup.classList.add('active');
+        }
+
+        function handleMouseLeave() {
+            const popup = document.getElementById('popup');
+            popup.classList.remove('active');
+        }
+
+        function toggleNewMessage() {
+            newMessage = !newMessage;
+            const newsButton = document.getElementById('newsButton');
+            if (newMessage) {
+                newsButton.classList.add('red');
+                newsButton.classList.remove('yellow');
+            } else {
+                newsButton.classList.add('yellow');
+                newsButton.classList.remove('red');
+            }
         }
     </script>
 </head>
@@ -250,37 +292,47 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button class="popup-button" onclick="togglePopup()">News</button>
+        <button id="newsButton" class="popup-button" onmouseenter="handleMouseEnter()" onmouseleave="handleMouseLeave()" onclick="togglePopup()">News</button>
     </div>
 
     <div id="popup" class="popup">
-        None as of now, but stay tuned for more.
-        <div>
-            <button onclick="openSettings()">Settings</button>
+        <div id="popupText">Welcome to the news popup</div>
+        <div class="footer">
+            <div class="contacts">
+                <span>Contact: </span>
+                <span class="gmail">hpnlighteam@gmail.com</span>
+            </div>
+            <div class="core-team">
+                <span>Core Team: </span>
+                <span>Haridas, Pranav, Nitai</span>
+            </div>
         </div>
+        <button onclick="openSettings()">Settings</button>
     </div>
 
     <div id="settingsPopup" class="settings-popup">
+        <button class="close-btn" onclick="closeSettings()">X</button>
         <h3>Settings</h3>
-        <label for="textColor">Color:</label>
-        <select id="textColor" onchange="updateTextColor(this.value)">
-            <option value="rainbow">Rainbow</option>
-            <option value="white">White</option>
-            <option value="orange">Orange</option>
-            <option value="blue">Blue</option>
-            <option value="pink">Pink</option>
-            <option value="black">Black</option>
-        </select>
-
-        <label for="effects">Effects:</label>
-        <select id="effects">
-            <option value="slam">Slam</option>
-            <option value="appear">Appear</option>
-            <option value="zoomIn">Zoom In</option>
-            <option value="none">None</option>
-        </select>
-
-        <button onclick="closeSettings()">Close</button>
+        <div>
+            <label for="colorSelect">Color: </label>
+            <select id="colorSelect" onchange="changeTextColor()">
+                <option value="Rainbow">Rainbow</option>
+                <option value="White">White</option>
+                <option value="Orange">Orange</option>
+                <option value="Blue">Blue</option>
+                <option value="Pink">Pink</option>
+                <option value="Black">Black</option>
+            </select>
+        </div>
+        <div>
+            <label for="effectSelect">Effects: </label>
+            <select id="effectSelect" onchange="changeEffect()">
+                <option value="Slam">Slam</option>
+                <option value="Appear">Appear</option>
+                <option value="Zoom In">Zoom In</option>
+                <option value="None">None</option>
+            </select>
+        </div>
     </div>
 
     <div class="content">
@@ -288,22 +340,9 @@
             <div class="prototype-video">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/lY4kFbane5E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="prototype-summary">
-                Summary of the prototype.
-            </div>
+            <div class="prototype-summary">Summary of the prototype</div>
         </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform" class="interest-button">Interest Form</a>
-    </div>
-
-    <div class="footer">
-        <div class="contacts">
-            <span>Contact: </span>
-            <span class="gmail">hpnlighteam@gmail.com</span>
-        </div>
-        <div class="core-team">
-            <span>Core Team: </span>
-            <span>John Doe, Jane Smith, Alice Johnson</span>
-        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpzIJiVRNRY229AeFEF94_yDXl2z9CWmfNTr-ChisZIQX63Q/viewform?usp=dialog" target="_blank" class="interest-button">Interest Form</a>
     </div>
 </body>
 </html>
