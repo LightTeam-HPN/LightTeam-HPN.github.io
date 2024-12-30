@@ -12,7 +12,7 @@
             flex-direction: column;
             justify-content: space-between;
             height: 100vh;
-            background-color: #121212;
+            background-color: white; /* Main page background remains white */
         }
 
         .header {
@@ -59,7 +59,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 50%;
-            background-color: black;
+            background-color: black; /* Default popup background */
             color: white;
             text-shadow: 0 0 5px yellow;
             padding: 20px;
@@ -222,9 +222,13 @@
     <script>
         let newsButtonHovered = false;
 
-        function togglePopup() {
+        function togglePopup(show) {
             const popup = document.getElementById('popup');
-            popup.classList.toggle('active');
+            if (show) {
+                popup.classList.add('active');
+            } else {
+                popup.classList.remove('active');
+            }
         }
 
         function toggleSettings() {
@@ -238,7 +242,7 @@
             const popupContent = document.querySelector('.popup-content');
             const selectedColor = colorSelect.value;
 
-            // Change text color
+            // Change text color and background color for readability
             let bgColor = '#121212';  // Default background
 
             if (selectedColor === 'Rainbow') {
@@ -286,6 +290,10 @@
             const settingsPopup = document.getElementById('settings-popup');
             settingsPopup.classList.remove('active');
         }
+
+        // Mouse enter/leave events to show/hide popup
+        document.querySelector('.popup-button').addEventListener('mouseenter', () => togglePopup(true));
+        document.querySelector('.popup-button').addEventListener('mouseleave', () => togglePopup(false));
     </script>
 </head>
 <body>
@@ -293,7 +301,7 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <button class="popup-button" onmouseover="togglePopup()">News</button>
+        <button class="popup-button" >News</button>
     </div>
 
     <div id="popup" class="popup">
