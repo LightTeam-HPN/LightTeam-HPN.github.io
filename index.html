@@ -17,13 +17,13 @@
         .header {
             display: flex;
             align-items: center;
-            padding: 20px;  /* Increased padding for larger header */
+            padding: 20px;  
             background-color: black;
             color: white;
             font-size: 1.5em;
             font-weight: bold;
             position: relative;
-            justify-content: flex-start; /* Align elements to the left */
+            justify-content: flex-start;
         }
 
         .header .company-name {
@@ -37,7 +37,6 @@
             margin: 0 10px;
         }
 
-        /* Positioning the News button inside the header at the top-right corner */
         .header .popup-button {
             position: absolute;
             right: 10px;
@@ -50,7 +49,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            animation: yellowShade 2s infinite linear; /* Animation for changing yellow shades */
+            animation: yellowShade 2s infinite linear;
         }
 
         @keyframes yellowShade {
@@ -61,28 +60,14 @@
             100% { background-color: #FFEB3B; }
         }
 
-        .header .popup-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Flashing red for new messages */
-        .popup-button.flash-red {
-            animation: redFlash 1s infinite alternate;
-        }
-
-        @keyframes redFlash {
-            0% { background-color: red; }
-            100% { background-color: darkred; }
-        }
-
         /* Popup styling */
         .popup {
             display: none;
             position: absolute;
-            top: 60px; /* Adjusted to come from just below the News button */
+            top: 60px;
             right: 10px;
-            width: 300px; /* Smaller width */
-            height: 150px; /* Smaller height */
+            width: 300px;
+            height: 150px;
             background-color: black;
             color: white;
             text-shadow: 0 0 5px yellow;
@@ -90,104 +75,76 @@
             text-align: center;
             z-index: 1000;
             box-shadow: 0 0 10px rgba(128, 128, 128, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-            animation: rainbowText 5s infinite linear;
-            border: none; /* Removed yellow border */
-        }
-
-        @keyframes rainbowText {
-            0% { color: red; }
-            16% { color: orange; }
-            33% { color: yellow; }
-            50% { color: green; }
-            66% { color: blue; }
-            83% { color: indigo; }
-            100% { color: violet; }
+            border: none;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
 
         .popup.active {
             display: block;
         }
 
-        /* Styling the popup text for better readability */
         .popup-text {
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Add shadow to make text easier to read */
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
         }
 
-        /* Different Animations for the text */
-        @keyframes slamIn {
-            0% { transform: translateY(-100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+        /* Settings Popup */
+        .settings-popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            text-align: center;
+            border-radius: 8px;
         }
 
-        @keyframes zoomIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .settings-popup.active {
+            display: block;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .close-button {
+            background-color: red;
+            color: white;
+            font-size: 1.2em;
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            animation: flashingRed 1s infinite alternate;
         }
 
-        @keyframes bounceIn {
-            0% { transform: translateY(100%); opacity: 0; }
-            60% { transform: translateY(-30%); opacity: 1; }
-            100% { transform: translateY(0); }
+        @keyframes flashingRed {
+            0% { background-color: red; }
+            100% { background-color: darkred; }
         }
 
-        /* Randomly applied animation class */
-        .popup-text.slam { animation: slamIn 1s ease-out; }
-        .popup-text.zoom { animation: zoomIn 1s ease-out; }
-        .popup-text.fade { animation: fadeIn 1s ease-out; }
-        .popup-text.bounce { animation: bounceIn 1s ease-out; }
-        
+        .settings-popup label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .settings-popup select {
+            margin-top: 5px;
+            padding: 5px;
+            width: 100%;
+        }
+
         .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             flex: 1;
             padding: 20px;
-        }
-
-        .prototype-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .prototype-video {
-            width: 90%;
-            max-width: 600px;
-            height: 337px; /* 16:9 aspect ratio for larger video */
-            border: 2px solid #ccc;
-        }
-
-        .prototype-summary {
-            width: 90%;
-            max-width: 400px;
-            font-size: 1.2em;
-            text-align: center;
-        }
-
-        .interest-button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 1em;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .interest-button:hover {
-            background-color: #0056b3;
         }
 
         .footer {
@@ -217,21 +174,6 @@
         }
 
         @media (min-width: 768px) {
-            .prototype-section {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .prototype-video {
-                width: 50%;
-                max-width: 600px;
-                height: auto;
-            }
-
-            .prototype-summary {
-                width: 45%;
-            }
-
             .footer {
                 flex-direction: row;
                 justify-content: space-between;
@@ -239,54 +181,154 @@
         }
     </style>
     <script>
-        // Toggle popup on hover for desktop
-        function togglePopup() {
-            const popup = document.getElementById('popup');
-            popup.classList.toggle('active');
-        }
+        // Trigger popup on hover
+        const newsButton = document.querySelector('.popup-button');
+        const popup = document.getElementById('popup');
+        const popupText = popup.querySelector('.popup-text');
 
-        // Show popup on click (for mobile)
-        function openPopup() {
-            const popup = document.getElementById('popup');
-            const text = popup.querySelector('.popup-text');
-            
-            // Randomly choose an animation
-            const animations = ['slam', 'zoom', 'fade', 'bounce'];
-            const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-
-            // Remove any previous animation class
-            text.classList.remove('slam', 'zoom', 'fade', 'bounce');
-
-            // Add a new random animation class
-            text.classList.add(randomAnimation);
-
+        newsButton.addEventListener('mouseover', () => {
             popup.classList.add('active');
+            applySelectedSettings(); // Apply selected settings on hover
+        });
+
+        newsButton.addEventListener('mouseout', () => {
+            popup.classList.remove('active');
+        });
+
+        // Open settings popup
+        function openSettings() {
+            const settingsPopup = document.getElementById('settings-popup');
+            settingsPopup.classList.add('active');
         }
 
-        // Close popup if clicked outside (for mobile)
-        function closePopup(event) {
-            const popup = document.getElementById('popup');
-            if (!popup.contains(event.target) && !document.querySelector('.popup-button').contains(event.target)) {
-                popup.classList.remove('active');
+        // Close settings popup and apply selected settings
+        function closeSettings() {
+            const settingsPopup = document.getElementById('settings-popup');
+            settingsPopup.classList.remove('active');
+            updateSettings(); // Apply the selected settings
+        }
+
+        // Update settings based on selected values
+        function updateSettings() {
+            const color = document.getElementById('color-select').value;
+            const effect = document.getElementById('effect-select').value;
+
+            // Change text color and background based on selection
+            switch (color) {
+                case 'rainbow':
+                    popupText.style.color = 'transparent';
+                    popup.style.background = 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)';
+                    popup.style.backgroundClip = 'text';
+                    popup.style.color = 'transparent';
+                    break;
+                case 'white':
+                    popupText.style.color = 'white';
+                    popup.style.background = 'black';
+                    break;
+                case 'orange':
+                    popupText.style.color = 'orange';
+                    popup.style.background = 'black';
+                    break;
+                case 'blue':
+                    popupText.style.color = 'blue';
+                    popup.style.background = 'black';
+                    break;
+                case 'pink':
+                    popupText.style.color = 'pink';
+                    popup.style.background = 'black';
+                    break;
+                case 'black':
+                    popupText.style.color = 'black';
+                    popup.style.background = 'white';
+                    break;
+            }
+
+            // Apply effect based on selection
+            switch (effect) {
+                case 'slam':
+                    popupText.style.animation = 'slamIn 1s ease-out';
+                    break;
+                case 'appear':
+                    popupText.style.animation = 'fadeIn 1s ease-out';
+                    break;
+                case 'zoom':
+                    popupText.style.animation = 'zoomIn 1s ease-out';
+                    break;
+                case 'none':
+                    popupText.style.animation = 'none';
+                    break;
             }
         }
 
-        // Add event listener to close popup when clicking outside on mobile
-        document.addEventListener('click', closePopup);
-
-        // Trigger flashing red effect on new message
-        function showNewMessage() {
-            const newsButton = document.querySelector('.popup-button');
-            newsButton.classList.add('flash-red');  // Add the flashing red effect
-
-            // Remove the flashing effect after 5 seconds
-            setTimeout(() => {
-                newsButton.classList.remove('flash-red');
-            }, 5000);
+        // Apply the slam effect
+        @keyframes slamIn {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
-        // For demonstration purposes, simulate a new message
-        setTimeout(showNewMessage, 3000);  // Simulate new message after 3 seconds
+        // Apply the zoom effect
+        @keyframes zoomIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        // Apply the fade effect
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        // Apply selected settings when hovering
+        function applySelectedSettings() {
+            const color = document.getElementById('color-select').value;
+            const effect = document.getElementById('effect-select').value;
+
+            // Change text color and background based on selection
+            switch (color) {
+                case 'rainbow':
+                    popupText.style.color = 'transparent';
+                    popup.style.background = 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)';
+                    popup.style.backgroundClip = 'text';
+                    popup.style.color = 'transparent';
+                    break;
+                case 'white':
+                    popupText.style.color = 'white';
+                    popup.style.background = 'black';
+                    break;
+                case 'orange':
+                    popupText.style.color = 'orange';
+                    popup.style.background = 'black';
+                    break;
+                case 'blue':
+                    popupText.style.color = 'blue';
+                    popup.style.background = 'black';
+                    break;
+                case 'pink':
+                    popupText.style.color = 'pink';
+                    popup.style.background = 'black';
+                    break;
+                case 'black':
+                    popupText.style.color = 'black';
+                    popup.style.background = 'white';
+                    break;
+            }
+
+            // Apply effect based on selection
+            switch (effect) {
+                case 'slam':
+                    popupText.style.animation = 'slamIn 1s ease-out';
+                    break;
+                case 'appear':
+                    popupText.style.animation = 'fadeIn 1s ease-out';
+                    break;
+                case 'zoom':
+                    popupText.style.animation = 'zoomIn 1s ease-out';
+                    break;
+                case 'none':
+                    popupText.style.animation = 'none';
+                    break;
+            }
+        }
     </script>
 </head>
 <body>
@@ -294,15 +336,36 @@
         <div>Logo</div>
         <div class="separator">|</div>
         <div class="company-name">HPN</div>
-        <!-- Update the button text to News, keeping it in the header -->
-        <button class="popup-button" 
-                onmouseover="togglePopup()" 
-                onmouseout="togglePopup()" 
-                onclick="openPopup()">News</button>
+        <button class="popup-button">News</button>
     </div>
 
     <div id="popup" class="popup">
         <div class="popup-text">None as of now, but stay tuned for more.</div>
+        <button onclick="openSettings()">Settings</button>
+    </div>
+
+    <!-- Settings Popup -->
+    <div id="settings-popup" class="settings-popup">
+        <button class="close-button" onclick="closeSettings()">X</button>
+        <h3>Settings</h3>
+
+        <label for="color-select">Color:</label>
+        <select id="color-select">
+            <option value="rainbow">Rainbow</option>
+            <option value="white">White</option>
+            <option value="orange">Orange</option>
+            <option value="blue">Blue</option>
+            <option value="pink">Pink</option>
+            <option value="black">Black</option>
+        </select>
+
+        <label for="effect-select">Effects:</label>
+        <select id="effect-select">
+            <option value="slam">Slam</option>
+            <option value="appear">Appear</option>
+            <option value="zoom">Zoom In</option>
+            <option value="none">None</option>
+        </select>
     </div>
 
     <div class="content">
